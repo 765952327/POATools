@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -15,7 +17,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Table {
 	private int count = 0;
-	private HashMap<String,String> map = new HashMap<String,String>();
+	private Map<String,String> map = new LinkedHashMap<String,String>();
 	public Table(String path) {
 		Workbook wb =null;
         Sheet sheet = null;
@@ -33,7 +35,7 @@ public class Table {
                 //获取最大列数
                 int colnum = 0;
                 if(rownum>0) {
-                	row:for (int i = 1; i<rownum; i++) {
+                	row:for (int i = 0; i<rownum; i++) {
                         row = sheet.getRow(i);
                         if(row !=null){
                         	colnum = row.getPhysicalNumberOfCells();
@@ -129,13 +131,13 @@ public class Table {
         return cellValue;
     }
     
-    public HashMap<String,String> getMap(){
+    public Map<String,String> getMap(){
     	return map;
     }
     /**
      * 
      */
     public static void main(String[] args) {
-    	new Table("对照表/对照.xlsx");
+    	new Table("对照表/对照表.xlsx");
     }
 }
